@@ -1,20 +1,25 @@
 // pricing-config.js
+require('dotenv').config();
 
-// Placeholder for flat-rate billing configuration
+// Salt Cat Charters – one-time booking prices (in USD cents)
+const saltCatPricing = {
+    halfDay: { amount: 25000, currency: 'usd', description: 'Half Day Charter' },
+    fullDay: { amount: 45000, currency: 'usd', description: 'Full Day Charter' },
+};
+
+// Dream Log App – flat-rate and usage-based billing configuration
 const flatRateBilling = {
-    price: 0,
+    price: 999,       // $9.99/month in cents
     currency: 'usd',
+    interval: 'month',
 };
 
-// Placeholder for usage-based billing configuration
 const usageBasedBilling = {
-    pricePerUnit: 0,
+    pricePerUnit: 100, // $1.00 per unit in cents
     currency: 'usd',
 };
 
-// Stripe Metered API Setup
-const stripe = require('stripe')('your_stripe_api_key');
+// Stripe instance using environment variable for API key
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Logic to implement flat-rate and usage-based billing goes here
-
-module.exports = { flatRateBilling, usageBasedBilling, stripe };
+module.exports = { saltCatPricing, flatRateBilling, usageBasedBilling, stripe };

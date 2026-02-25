@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "saltcat-website/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/create-charge",
+      "dest": "/api/create-charge.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/webhook",
+      "dest": "/api/webhook.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/.well-known/(.*)",
+      "dest": "/public/.well-known/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/saltcat-website/$1"
+    }
+  ],
+  "functions": {
+    "api/webhook.js": {
+      "bodyParser": false
+    }
+  }
+}

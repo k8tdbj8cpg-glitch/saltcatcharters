@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salt Cat Charters</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; background: #f0f4f8; }
+    header {
+      background: linear-gradient(135deg, #1a3c5e 0%, #0d6efd 100%);
+      color: #fff;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2.5rem; letter-spacing: 2px; }
+    header p { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.9; }
+    nav { background: #1a3c5e; display: flex; justify-content: center; gap: 2rem; padding: 0.75rem; }
+    nav a { color: #e0eaf5; text-decoration: none; font-weight: 600; font-size: 1rem; }
+    nav a:hover { color: #ffd700; }
+    section { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem; }
+    h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #1a3c5e; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .booking-form label { display: block; margin-top: 1rem; font-weight: 600; }
+    .booking-form input, .booking-form select {
+      width: 100%; padding: 0.6rem 0.9rem; margin-top: 0.4rem;
+      border: 1px solid #b0bec5; border-radius: 6px; font-size: 1rem;
+    }
+    .payment-options { display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .payment-btn {
+      flex: 1; min-width: 130px;
+      padding: 0.75rem 1rem;
+      border: 2px solid #0d6efd;
+      background: #fff; color: #0d6efd;
+      border-radius: 8px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .payment-btn:hover { background: #0d6efd; color: #fff; }
+    .payment-btn.crypto { border-color: #f7931a; color: #f7931a; }
+    .payment-btn.crypto:hover { background: #f7931a; color: #fff; }
+    #message { margin-top: 1rem; padding: 0.75rem; border-radius: 6px; display: none; }
+    #message.success { background: #d4edda; color: #155724; display: block; }
+    #message.error   { background: #f8d7da; color: #721c24; display: block; }
+    #stripe-card-element {
+      padding: 0.75rem; border: 1px solid #b0bec5;
+      border-radius: 6px; margin-top: 1rem; background: #fff;
+    }
+    iframe.dreamlog-embed {
+      width: 100%; height: 700px;
+      border: none; border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    footer {
+      text-align: center; padding: 1.5rem;
+      background: #1a3c5e; color: #a0b4c8; font-size: 0.9rem;
+    }
+  </style>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+<header>
+  <h1>⚓ Salt Cat Charters</h1>
+  <p>Book your next deep-sea adventure</p>
+</header>
+
+<nav>
+  <a href="#booking">Book a Charter</a>
+  <a href="#dreamlog">Dream Log App</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Salt Cat Charters Booking -->
+<section id="booking">
+  <h2>Book a Charter</h2>
+  <div class="card">
+    <form class="booking-form" id="bookingForm">
+      <label>Your Name
+        <input type="text" id="customerName" placeholder="Jane Smith" required />
+      </label>
+      <label>Email
+        <input type="email" id="customerEmail" placeholder="jane@example.com" required />
+      </label>
+      <label>Booking Date
+        <input type="date" id="bookingDate" required />
+      </label>
+      <label>Trip Type
+        <select id="tripType">
+          <option value="half_day">Half Day – $250</option>
+          <option value="full_day">Full Day – $450</option>
+        </select>
+      </label>
+
+      <div id="stripe-card-element"></div>
+
+      <div class="payment-options">
+        <button type="button" class="payment-btn" id="payCardBtn">💳 Pay by Card / Apple Pay</button>
+        <button type="button" class="payment-btn crypto" id="payCryptoBtn">₿ Pay with Crypto</button>
+      </div>
+
+      <div id="message"></div>
+    </form>
+  </div>
+</section>
+
+<!-- Dream Log App Embedded Section -->
+<section id="dreamlog">
+  <h2>Dream Log App</h2>
+  <div class="card">
+    <p style="margin-bottom:1rem">Track your dream catch records, subscribe monthly, or make a one-time purchase below.</p>
+    <iframe
+      class="dreamlog-embed"
+      src="/dreamlog"
+      title="Dream Log App"
+      loading="lazy"
+    ></iframe>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <div class="card">
+    <p>Email: <a href="mailto:info@saltcatcharters.com">info@saltcatcharters.com</a></p>
+    <p style="margin-top:0.5rem">Phone: (555) 867-5309</p>
+  </div>
+</section>
+
+<footer>
+  &copy; 2024 Salt Cat Charters &nbsp;|&nbsp; All Rights Reserved
+</footer>
+
+<script>
+  const STRIPE_PUBLISHABLE_KEY = window.__ENV__ && window.__ENV__.STRIPE_PUBLISHABLE_KEY
+    ? window.__ENV__.STRIPE_PUBLISHABLE_KEY
+    : 'pk_live_REPLACE_WITH_YOUR_KEY'; // Replace with your Stripe publishable key
+
+  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+  const elements = stripe.elements();
+  const cardElement = elements.create('card');
+  cardElement.mount('#stripe-card-element');
+
+  const PRICES = { half_day: 25000, full_day: 45000 }; // cents
+
+  function showMessage(text, type) {
+    const el = document.getElementById('message');
+    el.textContent = text;
+    el.className = type;
+  }
+
+  document.getElementById('payCardBtn').addEventListener('click', async () => {
+    const email = document.getElementById('customerEmail').value;
+    const date  = document.getElementById('bookingDate').value;
+    const trip  = document.getElementById('tripType').value;
+    if (!email || !date) return showMessage('Please fill in all fields.', 'error');
+
+    const amount = PRICES[trip];
+    const description = `Salt Cat Charters – ${trip.replace('_', ' ')} on ${date}`;
+
+    const resp = await fetch('/create-charge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ app: 'saltcat', paymentMethod: 'stripe', amount, description, customerEmail: email, bookingDate: date }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) return showMessage(data.error || 'Error creating payment.', 'error');
+
+    const { error } = await stripe.confirmCardPayment(data.clientSecret, {
+      payment_method: { card: cardElement, billing_details: { email } },
+    });
+
+    if (error) return showMessage(error.message, 'error');
+    showMessage('Payment successful! You will receive a confirmation email shortly.', 'success');
+  });
+
+  document.getElementById('payCryptoBtn').addEventListener('click', async () => {
+    const email = document.getElementById('customerEmail').value;
+    const date  = document.getElementById('bookingDate').value;
+    const trip  = document.getElementById('tripType').value;
+    if (!email || !date) return showMessage('Please fill in all fields.', 'error');
+
+    const amount = PRICES[trip];
+    const description = `Salt Cat Charters – ${trip.replace('_', ' ')} on ${date}`;
+
+    const resp = await fetch('/create-charge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ app: 'saltcat', paymentMethod: 'coinbase', amount, currency: 'usd', description, customerEmail: email, bookingDate: date }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) return showMessage(data.error || 'Error creating crypto charge.', 'error');
+
+    window.open(data.hostedUrl, '_blank');
+    showMessage('Redirecting to Coinbase Commerce for crypto payment…', 'success');
+  });
+</script>
+</body>
+</html>
