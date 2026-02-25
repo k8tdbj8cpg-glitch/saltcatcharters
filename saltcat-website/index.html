@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salt Cat Charters</title>
+    <style>
+        /* Reset & base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            color: #1a3c5e;
+        }
+
+        /* Header / Nav */
+        header {
+            background-color: #1a3c5e;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        nav a {
+            color: #a8d8ea;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: #ffffff; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1a3c5e 0%, #2a6496 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .hero h2 { font-size: 2.4rem; margin-bottom: 0.75rem; }
+        .hero p  { font-size: 1.15rem; max-width: 640px; margin: 0 auto 1.5rem; }
+        .hero a.btn {
+            display: inline-block;
+            background-color: #a8d8ea;
+            color: #1a3c5e;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .hero a.btn:hover { background-color: #ffffff; }
+
+        /* Sections */
+        .section { padding: 3rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section h2 {
+            font-size: 1.9rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #2a6496;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+        .section p { font-size: 1rem; line-height: 1.7; margin-bottom: 1rem; }
+
+        /* Dream Log section */
+        #dream-log {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 1100px;
+        }
+        #dream-log h2 {
+            font-size: 1.9rem;
+            margin-bottom: 0.5rem;
+            color: #1a3c5e;
+            border-bottom: 3px solid #2a6496;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+        #dream-log p { font-size: 1rem; line-height: 1.7; margin: 0.75rem 0 1.25rem; }
+        #dream-log .dream-log-links { margin-bottom: 1.5rem; }
+        #dream-log .dream-log-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            color: #2a6496;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #a8d8ea;
+            transition: border-color 0.2s;
+        }
+        #dream-log .dream-log-links a:hover { border-color: #2a6496; }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 62.5%; /* 16:10 ratio */
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid #a8d8ea;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: #a8d8ea;
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>&#9875; Salt Cat Charters</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#dream-log">Dream Log</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h2>Your Adventure Awaits</h2>
+        <p>Premium fishing charters and open-water experiences on the Gulf Coast. Book your trip today and make memories that last a lifetime.</p>
+        <a href="#dream-log" class="btn">Explore Dream Log App</a>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+        <h2>About Salt Cat Charters</h2>
+        <p>Salt Cat Charters offers world-class guided fishing trips for anglers of all experience levels. Whether you're chasing redfish in the shallows or targeting trophy catches offshore, our experienced captains know these waters inside and out.</p>
+        <p>We are committed to sustainable fishing practices and ensuring every guest has an unforgettable experience.</p>
+    </section>
+
+    <!-- Dream Log App -->
+    <section id="dream-log">
+        <h2>Dream Log App</h2>
+        <p>Track your catches, plan your trips, and relive your best moments with the <strong>Dream Log</strong> app — fully integrated with your Salt Cat Charters experience.</p>
+        <div class="dream-log-links">
+            <a href="https://dream-log.glitch.me" target="_blank" rel="noopener noreferrer">Open Dream Log &#8599;</a>
+            <a href="https://dream-log.glitch.me/dashboard" target="_blank" rel="noopener noreferrer">Go to Dashboard &#8599;</a>
+        </div>
+        <div class="iframe-container">
+            <iframe
+                src="https://dream-log.glitch.me"
+                title="Dream Log App"
+                allow="fullscreen"
+                loading="lazy"
+            ></iframe>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+        <h2>Pricing</h2>
+        <p>We offer flexible pricing plans to fit every angler's budget. From single-day excursions to multi-day offshore packages, Salt Cat Charters has an option for you.</p>
+        <p>Payments are processed securely through Stripe. Contact us for a custom quote.</p>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Ready to book your next adventure? Reach out to us and we'll get you set up with the perfect charter experience.</p>
+        <p>Email: <a href="mailto:info@saltcatcharters.com">info@saltcatcharters.com</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Salt Cat Charters &mdash; All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

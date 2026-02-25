@@ -1,0 +1,11 @@
+# Stripe Domain Verification
+#
+# This file is used by Stripe to verify domain ownership for payment
+# processing (e.g., Stripe.js, Payment Links, and Stripe Checkout).
+#
+# Replace the placeholder value below with your actual verification token
+# provided by Stripe in the Dashboard under Settings > Domains.
+#
+# See: https://stripe.com/docs/payments/checkout/custom-domains
+
+stripe-verification-token: REPLACE_WITH_YOUR_STRIPE_DOMAIN_VERIFICATION_TOKEN

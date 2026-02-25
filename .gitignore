@@ -1,1 +1,6 @@
 .env
+node_modules/
+
+# Ensure .well-known and website files are tracked
+!.well-known/
+!saltcat-website/
