@@ -1,1 +1,8 @@
 .env
+
+# Ensure payment-related assets are tracked
+!saltcat-website/.well-known/
+!saltcat-website/.well-known/**
+!integrations/pricing-config.js
+!integrations/stripe-checkout.js
+!integrations/dream-log-payments.js
