@@ -1,0 +1,14 @@
+This file is intentionally left as a placeholder.
+
+To enable Apple Pay on your domain, you must obtain the actual domain association file
+from your Stripe dashboard:
+
+1. Go to https://dashboard.stripe.com/settings/payment_method_domains
+2. Add your domain (e.g., saltcatcharters.com and dreamlog.app)
+3. Download the apple-developer-merchantid-domain-association file
+4. Replace this file with the downloaded file
+
+The file must be served at:
+  https://yourdomain.com/.well-known/apple-developer-merchantid-domain-association
+
+This path is already configured in vercel.json.
