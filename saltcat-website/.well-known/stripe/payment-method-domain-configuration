@@ -1,0 +1,10 @@
+{
+  "domain_association": {
+    "version": 1,
+    "payment_method_types": ["card", "crypto"],
+    "wallets": {
+      "apple_pay": { "enabled": true },
+      "google_pay": { "enabled": true }
+    }
+  }
+}
